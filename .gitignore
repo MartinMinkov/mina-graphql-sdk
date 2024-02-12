@@ -1,0 +1,26 @@
+# Compiled JavaScript (.js and .map files)
+/dist
+/*.js
+/*.js.map
+
+# Node.js Dependency Directory
+/node_modules
+
+# Logs and Debugging
+*.log
+npm-debug.log*
+
+# Editor/IDE Configs
+.vscode
+.idea
+
+# Local Environment Variables
+.env
+.env.local
+
+# TypeScript Build 
+/dist
+
+# OS-specific Metadata
+.DS_Store
+Thumbs.db 
