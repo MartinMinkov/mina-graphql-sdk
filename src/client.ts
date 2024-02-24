@@ -15,7 +15,7 @@ export default class MinaGraphQLClient {
       this.sdk = getSdk(this.client);
     } catch (e) {
       throw Error(
-        "Invalid URL: Please ensure a protocol is included (e.g., https://api.example.com/graphql)."
+        `Failed to initialize GraphQL client with URL '${url}'. This can occur if the URL is malformed or missing a protocol (e.g., 'https://'). Please ensure the URL is correctly formatted and includes a protocol like http:// or https://. Example: 'https://api.example.com/graphql'. Original error: ${e.message}`
       );
     }
   }
