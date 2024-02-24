@@ -16,4 +16,4 @@ if [[ "$BRANCH" != "develop" && "$BRANCH" != "berkeley" ]]; then
 fi
 
 # Download the file from the specified branch
-curl -L "https://raw.githubusercontent.com/MinaProtocol/mina/$BRANCH/graphql_schema.json" -o "$BRANCH.schema.json"
+curl -L "https://raw.githubusercontent.com/MinaProtocol/mina/$BRANCH/graphql_schema.json" -o ./schemas/"$BRANCH.schema.json"
