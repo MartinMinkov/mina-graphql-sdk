@@ -1,0 +1,44 @@
+# Dependency directories
+node_modules/
+
+# TypeScript source files
+src/
+
+# TypeScript type definition source files
+types/
+
+# Testing files
+test/
+tests/
+__tests__/
+*.spec.ts
+*.test.ts
+
+# Configuration files
+tsconfig.json
+tsconfig.build.json
+jest.config.js
+.babelrc
+.eslintrc.js
+.prettierrc
+.gitignore
+.npmignore
+.editorconfig
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output directory
+!dist/
+
+# Documentation
+README.md
+CHANGELOG.md
+!LICENSE
+
+# Others
+*.log
+.DS_Store
+Thumbs.db
