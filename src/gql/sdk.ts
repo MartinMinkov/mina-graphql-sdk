@@ -1720,7 +1720,7 @@ export type Query = {
   daemonStatus: DaemonStatus;
   /** Evaluate a vrf for the given public key. This includes a witness which may be verified without access to the private key for this vrf evaluation. */
   evaluateVrf: VrfEvaluation;
-  /** The runtime configuration for a blockchain fork intended to be a continuation of the current one. */
+  /** The runtime configuration for a blockchain fork intended to be a continuation of the current one. By default, this returns the newest block that appeared before the transaction stop slot provided in the configuration, or the best tip if no such block exists. */
   fork_config: Scalars['JSON']['output'];
   /** Get the genesis block */
   genesisBlock: Block;
@@ -1988,6 +1988,20 @@ export type GetPooledUserCommandsQueryVariables = Exact<{ [key: string]: never; 
 
 
 export type GetPooledUserCommandsQuery = { pooledUserCommands: Array<{ fee: any, id: any, hash: any, memo: string, kind: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { nonce?: any | null, publicKey: any } } | { id: any, amount: any, failureReason?: any | null, fee: any, feeToken: any, hash: any, kind: any, memo: string, token: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { publicKey: any, nonce?: any | null } }> };
+
+export type GetPooledUserCommandsByPublicKeyQueryVariables = Exact<{
+  publicKey: Scalars['PublicKey']['input'];
+}>;
+
+
+export type GetPooledUserCommandsByPublicKeyQuery = { pooledUserCommands: Array<{ fee: any, id: any, hash: any, memo: string, kind: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { nonce?: any | null, publicKey: any } } | { id: any, amount: any, failureReason?: any | null, fee: any, feeToken: any, hash: any, kind: any, memo: string, token: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { publicKey: any, nonce?: any | null } }> };
+
+export type GetPooledUserCommandsByHashesQueryVariables = Exact<{
+  hashes?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+}>;
+
+
+export type GetPooledUserCommandsByHashesQuery = { pooledUserCommands: Array<{ fee: any, id: any, hash: any, memo: string, kind: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { nonce?: any | null, publicKey: any } } | { id: any, amount: any, failureReason?: any | null, fee: any, feeToken: any, hash: any, kind: any, memo: string, token: any, validUntil: any, receiver: { publicKey: any, nonce?: any | null }, source: { publicKey: any, nonce?: any | null } }> };
 
 
 export const GetAccountDocument = gql`
@@ -3537,6 +3551,86 @@ export const GetPooledUserCommandsDocument = gql`
   }
 }
     `;
+export const GetPooledUserCommandsByPublicKeyDocument = gql`
+    query GetPooledUserCommandsByPublicKey($publicKey: PublicKey!) {
+  pooledUserCommands(publicKey: $publicKey) {
+    fee
+    id
+    hash
+    memo
+    kind
+    receiver {
+      publicKey
+      nonce
+    }
+    source {
+      nonce
+      publicKey
+    }
+    validUntil
+    ... on UserCommandPayment {
+      id
+      amount
+      failureReason
+      fee
+      feeToken
+      hash
+      kind
+      memo
+      receiver {
+        publicKey
+        nonce
+      }
+      source {
+        publicKey
+        nonce
+      }
+      token
+      validUntil
+    }
+  }
+}
+    `;
+export const GetPooledUserCommandsByHashesDocument = gql`
+    query GetPooledUserCommandsByHashes($hashes: [String!]) {
+  pooledUserCommands(hashes: $hashes) {
+    fee
+    id
+    hash
+    memo
+    kind
+    receiver {
+      publicKey
+      nonce
+    }
+    source {
+      nonce
+      publicKey
+    }
+    validUntil
+    ... on UserCommandPayment {
+      id
+      amount
+      failureReason
+      fee
+      feeToken
+      hash
+      kind
+      memo
+      receiver {
+        publicKey
+        nonce
+      }
+      source {
+        publicKey
+        nonce
+      }
+      token
+      validUntil
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -3589,6 +3683,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetPooledUserCommands(variables?: GetPooledUserCommandsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPooledUserCommandsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPooledUserCommandsQuery>(GetPooledUserCommandsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPooledUserCommands', 'query', variables);
+    },
+    GetPooledUserCommandsByPublicKey(variables: GetPooledUserCommandsByPublicKeyQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPooledUserCommandsByPublicKeyQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPooledUserCommandsByPublicKeyQuery>(GetPooledUserCommandsByPublicKeyDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPooledUserCommandsByPublicKey', 'query', variables);
+    },
+    GetPooledUserCommandsByHashes(variables?: GetPooledUserCommandsByHashesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPooledUserCommandsByHashesQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPooledUserCommandsByHashesQuery>(GetPooledUserCommandsByHashesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPooledUserCommandsByHashes', 'query', variables);
     }
   };
 }

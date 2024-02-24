@@ -125,8 +125,13 @@ export default class MinaGraphQLClient {
     getPooledUserCommands: async () => {
       return await this.sdk.GetPooledUserCommands();
     },
-    // Get a specific job by hash
-    // Get all jobs for a specific public key
-    // Get all snark pool jobs
+
+    getPooledUserCommandsByPublicKey: async (publicKey: string) => {
+      return await this.sdk.GetPooledUserCommandsByPublicKey({ publicKey });
+    },
+
+    getPooledUserCommandsByHashes: async (hashes: string[]) => {
+      return await this.sdk.GetPooledUserCommandsByHashes({ hashes });
+    },
   };
 }

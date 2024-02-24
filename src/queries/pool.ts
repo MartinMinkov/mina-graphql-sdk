@@ -89,7 +89,7 @@ graphql(
 graphql(
   `
     query GetPooledUserCommandsByHashes($hashes: [String!]) {
-      pooledUserCommands(publicKey: $publicKey) {
+      pooledUserCommands(hashes: $hashes) {
         fee
         id
         hash
