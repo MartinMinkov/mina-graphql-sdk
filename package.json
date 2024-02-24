@@ -1,6 +1,6 @@
 {
-  "name": "mina-graphql",
-  "version": "1.0.0",
+  "name": "mina-graphql-sdk",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "type": "module",
