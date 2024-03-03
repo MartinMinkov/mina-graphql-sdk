@@ -1,9 +1,13 @@
 {
   "name": "mina-graphql-sdk",
   "version": "0.1.4",
-  "description": "",
+  "description": "A typesafe TypeScript SDK for interacting with Mina's GraphQL daemon. Features include automatically generated types and wrappers for queries and mutations, a direct GraphQL query option for advanced scenarios, and easy access to accounts, blocks, and transactions data.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MartinMinkov/mina-graphql-sdk.git"
+  },
   "type": "module",
   "files": [
     "dist"
@@ -15,8 +19,18 @@
     "clean": "rm -rf dist",
     "codegen": "graphql-codegen --config codegen.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "mina",
+    "graphql",
+    "sdk",
+    "typescript",
+    "queries",
+    "mutations",
+    "accounts",
+    "blocks",
+    "transactions"
+  ],
+  "author": "Martin Minkov",
   "license": "ISC",
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
